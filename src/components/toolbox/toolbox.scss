@@ -1,0 +1,48 @@
+@import '../../vars/scss_variables';
+
+@mixin flexBox {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.toolbox-container {
+    @include flexBox;
+
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    //height: 15vh;
+    width: 100vw;
+    padding: .15em;
+    background: linear-gradient(45deg, #222a 5%, #333b, #222a 95%);
+
+}
+
+.toolbox {
+    
+    min-width: 33%; // remove this declaration later on !
+
+    .toolbox__paragraph {
+        font-size: 1.2rem;
+        padding: .2em;
+        margin: .2em;
+        color: $color__primary;
+        font-weight: 650;
+    }
+
+    .toolbox__button-box {
+        padding: .6em;
+    }
+}
+
+.btn-tool {
+    background: linear-gradient(45deg, #333, #555);
+    border-color: $color__primary--dark;
+    padding: 1em;
+    border-radius: 25% 15%;
+
+    &:hover {
+       cursor: pointer;
+    }
+}

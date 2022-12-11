@@ -1,0 +1,35 @@
+.toolbox-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  width: 100vw;
+  padding: 0.15em;
+  background: linear-gradient(45deg, rgba(34, 34, 34, 0.6666666667) 5%, rgba(51, 51, 51, 0.7333333333), rgba(34, 34, 34, 0.6666666667) 95%);
+}
+
+.toolbox {
+  min-width: 33%;
+}
+.toolbox .toolbox__paragraph {
+  font-size: 1.2rem;
+  padding: 0.2em;
+  margin: 0.2em;
+  color: hsl(189deg, 86%, 53%);
+  font-weight: 650;
+}
+.toolbox .toolbox__button-box {
+  padding: 0.6em;
+}
+
+.btn-tool {
+  background: linear-gradient(45deg, #333, #555);
+  border-color: hsl(189deg, 86%, 38%);
+  padding: 1em;
+  border-radius: 25% 15%;
+}
+.btn-tool:hover {
+  cursor: pointer;
+}/*# sourceMappingURL=toolbox.css.map */
