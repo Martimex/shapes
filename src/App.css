@@ -17,8 +17,20 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  /*     font-size: calc(10px + 2vmin); */
   color: white;
+}
+
+.App-content {
+  width: 100vw;
+  position: absolute;
+  bottom: 0%;
+  left: 0%;
+  width: 100vw;
+  height: 82vh;
+  display: grid;
+  grid-template-columns: 80% 20%;
+  grid-template-rows: 1;
 }
 
 .btn {
@@ -27,5 +39,4 @@ body {
 
 .icon {
   font-size: 120%;
-  padding: 0.3em 0.6em 0.3em 0.3em;
 }/*# sourceMappingURL=App.css.map */

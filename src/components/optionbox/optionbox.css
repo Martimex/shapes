@@ -1,0 +1,15 @@
+.option-box {
+  background: linear-gradient(135deg, rgba(17, 17, 17, 0.4666666667) 5%, rgba(34, 34, 34, 0.5333333333), rgba(17, 17, 17, 0.4666666667) 95%);
+  border-width: 0em 0em 0em 0.1em;
+  box-shadow: 0em 0em 0.1em 0.1em hsl(189deg, 86%, 18%), 0em 0em 0.3em 0.3em rgba(34, 34, 34, 0.8);
+  color: hsl(189deg, 86%, 38%);
+  font-weight: 550;
+}
+
+.option-box__message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  height: 100%;
+}/*# sourceMappingURL=optionbox.css.map */

@@ -2,12 +2,15 @@
   display: flex;
   align-items: flex-start;
   justify-content: center;
+  z-index: 20;
   position: absolute;
   top: 0%;
   left: 0%;
   width: 100vw;
   padding: 0.15em;
+  height: 18vh;
   background: linear-gradient(45deg, rgba(34, 34, 34, 0.6666666667) 5%, rgba(51, 51, 51, 0.7333333333), rgba(34, 34, 34, 0.6666666667) 95%);
+  box-shadow: 0em 0.1em 0em 0.1em hsl(189deg, 86%, 18%), 0em 0.3em 0 0.3em rgba(34, 34, 34, 0.6);
 }
 
 .toolbox {
@@ -27,9 +30,38 @@
 .btn-tool {
   background: linear-gradient(45deg, #333, #555);
   border-color: hsl(189deg, 86%, 38%);
-  padding: 1em;
   border-radius: 25% 15%;
+  padding: 0.65em;
+  font-size: 1rem;
+  font-weight: 650;
+  margin: 0.2em;
 }
 .btn-tool:hover {
   cursor: pointer;
+}
+.btn-tool .btn-tool__container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+.btn-tool .btn-tool__paragraph {
+  margin: 0;
+  font-size: 1em;
+}
+
+.btn-tool[data-use=modify] {
+  width: 30%;
+}
+
+.btn-tool[data-use=create] {
+  width: 23%;
+}
+
+.btn-tool[data-use=design] {
+  width: 30%;
+}
+
+.icon-tool {
+  font-size: 120%;
+  margin-right: 0.5em;
 }/*# sourceMappingURL=toolbox.css.map */

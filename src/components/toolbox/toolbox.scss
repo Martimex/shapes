@@ -9,14 +9,17 @@
 .toolbox-container {
     @include flexBox;
 
+    z-index: 20;
     position: absolute;
     top: 0%;
     left: 0%;
     //height: 15vh;
     width: 100vw;
     padding: .15em;
+    height: 18vh;
     background: linear-gradient(45deg, #222a 5%, #333b, #222a 95%);
-
+    box-shadow: 0em .1em 0em .1em $color__primary--misty,
+        0em .3em 0 .3em #2229;
 }
 
 .toolbox {
@@ -39,10 +42,40 @@
 .btn-tool {
     background: linear-gradient(45deg, #333, #555);
     border-color: $color__primary--dark;
-    padding: 1em;
     border-radius: 25% 15%;
+    padding: .65em;
+    font-size: 1rem;
+    font-weight: 650;
+    margin: .2em;
 
     &:hover {
        cursor: pointer;
     }
+
+    .btn-tool__container {
+        @include flexBox;
+    }
+
+    .btn-tool__paragraph {
+        margin: 0;
+        font-size: 1em;
+    }
+}
+
+.btn-tool[data-use="modify"] {
+    width: 30%;
+}
+
+.btn-tool[data-use="create"] {
+    width: 23%;
+}
+
+.btn-tool[data-use="design"] {
+    width: 30%;
+}
+
+.icon-tool {
+    font-size: 120%;
+    margin-right: .5em;
+    //margin: 0 .5em 0 0;
 }

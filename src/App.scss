@@ -19,8 +19,24 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: calc(10px + 2vmin);
+/*     font-size: calc(10px + 2vmin); */
     color: white;
+  }
+
+  .App-bar {
+   box-shadow: 0em 1.3em 0em 1.3em #a22;
+  }
+
+  .App-content {
+    width: 100vw;
+    position: absolute;
+    bottom: 0%;
+    left: 0%;
+    width: 100vw;
+    height: calc(100vh - 18vh);
+    display: grid;
+    grid-template-columns: 80% 20%;
+    grid-template-rows: 1;
   }
   
   .btn {
@@ -29,5 +45,6 @@
 
   .icon {
     font-size: 120%;
-    padding: .3em .6em .3em .3em;
+    //padding: .3em .6em .3em .3em;
+
   }

@@ -1,0 +1,20 @@
+@import '../../vars/scss_variables';
+
+@mixin flexBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.workspace-board {
+    @include flexBox;
+    background: #282c34;
+}
+
+.workspace-board__map {
+    //background-image: linear-gradient(77deg, #359, #397, #283);
+    background-image: url('./addons/workspace_map.svg');
+    background-repeat: repeat;
+    width: 100%;
+    height: 100%;
+}
