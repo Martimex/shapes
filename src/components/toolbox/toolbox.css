@@ -43,6 +43,7 @@
   display: flex;
   align-items: flex-start;
   justify-content: center;
+  pointer-events: none;
 }
 .btn-tool .btn-tool__paragraph {
   margin: 0;

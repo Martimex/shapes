@@ -54,6 +54,7 @@
 
     .btn-tool__container {
         @include flexBox;
+        pointer-events: none;
     }
 
     .btn-tool__paragraph {

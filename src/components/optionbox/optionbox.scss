@@ -1,8 +1,10 @@
+$text__margin--y: .6em;
+
 @import '../../vars/scss_variables';
 
-@mixin flexBox {
+@mixin flexBox($align) {
     display: flex;
-    align-items: center;
+    align-items: $align;
     justify-content: center;
 }
 
@@ -15,8 +17,109 @@
     font-weight: 550;
 }
 
-.option-box__message {
-    @include flexBox;
+.option-box__content {
     font-size: 1.2rem;
     height: 100%;
+}
+
+.option-box__content[data-state="inactive"] {
+    @include flexBox(center);
+}
+
+.option-box__content[data-state="active"] {
+    @include flexBox(start);
+}
+
+.option-box__message {
+
+    .option-box__steps {
+        margin: 2.4em 0 0 1em;
+    }
+
+    margin: $text__margin--y calc($text__margin--y * 2) ;
+
+    .option-box__text--large {
+        font-size: 1.8rem;
+        font-weight: 750;
+        position: relative;
+        margin-bottom: 2em;
+        color: $color__primary;
+
+        &::before {
+            content: '';
+            position: absolute;
+            bottom: 0%;
+            left: 0%;
+            width: 50%;
+            margin: -$text__margin--y 0;
+            padding: .05em;
+            background: none;
+            border: .15em groove #0000;
+            border-top-color: $color__secondary--dark;
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: 0%;
+            right: 0%;
+            width: 50%;
+            margin: -$text__margin--y 0;
+            padding: .05em;
+            background: none;
+            border: .15em groove #0000;
+            border-top-color: $color__secondary--dark;
+        }
+    }
+    
+    .option-box__text {
+        font-size: 1.25rem;
+        font-weight: 500;
+        position: relative;
+        color: $color__primary--light;
+    }
+
+    .option-box__text--small {
+        font-size: 1rem;
+        color: $color__primary--dark;
+    }
+}
+
+.option-box__step {
+    margin: 1.25em 0;
+}
+
+.option-box__text--framed {
+    font-style: oblique;
+    padding: .2em;
+
+
+    &::before {
+        content: '';
+        position: absolute;
+        bottom: 0%;
+        left: 0%;
+        width: 30%; height: 10%;
+        padding: .1em;
+        background: none;
+        border: .15em groove #0000;
+        border-bottom-color: $color__primary--light;
+        border-left-color: $color__primary--light;
+        margin: -.5em 0;
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: 0%;
+        right: 0%;
+        width: 30%; height: 10%;
+        padding: .1em;
+        background: none;
+        border: .15em groove #0000;
+        border-bottom-color: $color__primary--light;
+        border-right-color: $color__primary--light;
+        margin: -.5em 0;
+    }
+
 }

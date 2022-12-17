@@ -6,10 +6,104 @@
   font-weight: 550;
 }
 
-.option-box__message {
+.option-box__content {
+  font-size: 1.2rem;
+  height: 100%;
+}
+
+.option-box__content[data-state=inactive] {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem;
-  height: 100%;
+}
+
+.option-box__content[data-state=active] {
+  display: flex;
+  align-items: start;
+  justify-content: center;
+}
+
+.option-box__message {
+  margin: 0.6em 1.2em;
+}
+.option-box__message .option-box__steps {
+  margin: 2.4em 0 0 1em;
+}
+.option-box__message .option-box__text--large {
+  font-size: 1.8rem;
+  font-weight: 750;
+  position: relative;
+  margin-bottom: 2em;
+  color: hsl(189deg, 86%, 53%);
+}
+.option-box__message .option-box__text--large::before {
+  content: "";
+  position: absolute;
+  bottom: 0%;
+  left: 0%;
+  width: 50%;
+  margin: -0.6em 0;
+  padding: 0.05em;
+  background: none;
+  border: 0.15em groove rgba(0, 0, 0, 0);
+  border-top-color: #999;
+}
+.option-box__message .option-box__text--large::after {
+  content: "";
+  position: absolute;
+  bottom: 0%;
+  right: 0%;
+  width: 50%;
+  margin: -0.6em 0;
+  padding: 0.05em;
+  background: none;
+  border: 0.15em groove rgba(0, 0, 0, 0);
+  border-top-color: #999;
+}
+.option-box__message .option-box__text {
+  font-size: 1.25rem;
+  font-weight: 500;
+  position: relative;
+  color: hsl(189deg, 86%, 68%);
+}
+.option-box__message .option-box__text--small {
+  font-size: 1rem;
+  color: hsl(189deg, 86%, 38%);
+}
+
+.option-box__step {
+  margin: 1.25em 0;
+}
+
+.option-box__text--framed {
+  font-style: oblique;
+  padding: 0.2em;
+}
+.option-box__text--framed::before {
+  content: "";
+  position: absolute;
+  bottom: 0%;
+  left: 0%;
+  width: 30%;
+  height: 10%;
+  padding: 0.1em;
+  background: none;
+  border: 0.15em groove rgba(0, 0, 0, 0);
+  border-bottom-color: hsl(189deg, 86%, 68%);
+  border-left-color: hsl(189deg, 86%, 68%);
+  margin: -0.5em 0;
+}
+.option-box__text--framed::after {
+  content: "";
+  position: absolute;
+  bottom: 0%;
+  right: 0%;
+  width: 30%;
+  height: 10%;
+  padding: 0.1em;
+  background: none;
+  border: 0.15em groove rgba(0, 0, 0, 0);
+  border-bottom-color: hsl(189deg, 86%, 68%);
+  border-right-color: hsl(189deg, 86%, 68%);
+  margin: -0.5em 0;
 }/*# sourceMappingURL=optionbox.css.map */

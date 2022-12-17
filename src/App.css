@@ -21,6 +21,10 @@ body {
   color: white;
 }
 
+.App-bar {
+  box-shadow: 0em 1.3em 0em 1.3em #a22;
+}
+
 .App-content {
   width: 100vw;
   position: absolute;
