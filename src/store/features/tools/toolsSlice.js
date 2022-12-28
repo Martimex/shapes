@@ -3,7 +3,7 @@ const initialState = {
     currentTool: ['default', 'default'],
     stepNo: 0,
     allTools: {
-        'default': { 'default': { showcase: { title: 'Nothing to showcase yet !', steps: [] } } },
+        'default': { 'default': { showcase: { title: 'Nothing to showcase yet!', steps: [] } } },
         'modify': {
             'resize': {
                 showcase: {
@@ -39,8 +39,8 @@ const initialState = {
                     title: 'Create square',
                     description: 'Create a new square object',
                     steps: [
-                        ['Click to set up an initial point for a new square'],
-                        ['Follow along one of given vertices to set a square size'],
+                        ['Click to set up a central point for a new square'],
+                        ['Set another point to define a square size'],
                     ]
                 },
                 /*  properties: {
@@ -56,7 +56,7 @@ const initialState = {
                     description: 'Create a new rectangle object',
                     steps: [
                         ['Click to set up an initial point for a new rectangle'],
-                        ['Set the opposite point to define rectangle size'],
+                        ['Set the opposite vertice to define rectangle size'],
                     ]
                 }
             },
@@ -76,7 +76,7 @@ const initialState = {
                     title: 'Create circle',
                     description: 'Create a new triangle object',
                     steps: [
-                        ['Click to set up an initial point for a new circle'],
+                        ['Click to set up a central point for a new circle'],
                         ['Set the another point to define circle radius'],
                     ]
                 }
@@ -123,9 +123,12 @@ export const toolsSlice = createSlice({
         },
         doLog: (state, action) => {
             console.log('xD');
+        },
+        increaseStep: (state, action) => {
+            state.stepNo += 1;
         }
     }
 });
-export const { changeTool, doLog } = toolsSlice.actions;
+export const { changeTool, doLog, increaseStep } = toolsSlice.actions;
 export default toolsSlice.reducer;
 //# sourceMappingURL=toolsSlice.js.map

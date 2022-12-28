@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import './toolbox.css';
-import fireAction from "./addons/actionInitializers";
+//import fireAction from "./addons/actionInitializers"; uncomment later when working with design and modify parts !!!
 import { useAppDispatch } from "../../store/hooks";
 import { 
     changeTool
@@ -16,15 +16,25 @@ import {
 import { IconDefinition } from "@fortawesome/free-regular-svg-icons";
 //import ToolboxSection from "./addons/toolboxSectionGenerator";
 
-function detectButton(e: React.MouseEvent<HTMLElement, MouseEvent>, dispatch: any): void {
+function detectButton(e: React.MouseEvent<HTMLElement, MouseEvent>, dispatch: any, [actionButton, setActionButton]: [HTMLElement, any]): void {
     //console.log(typeof(e.target), e.target.hasOwnProperty("dataset['use']"), e.target.dataset, e.target)
     if(!(e.target instanceof HTMLElement)) return;
     if(!e.target.dataset['use'] || !e.target.dataset['spec']) return;
 
     // Now we know that we are 100% working only with Action buttons
-    dispatch(changeTool( {use: e.target.dataset['use'], spec: e.target.dataset['spec'] }));
-    fireAction([e.target.dataset['use'], e.target.dataset['spec']]);
+    actionButton.classList.remove('active');
 
+    // Check if previously clicked button is the same as clicked now !
+    if(e.target === actionButton) { 
+        console.warn('equal');
+        dispatch(changeTool( {use: 'default', spec: 'default' }));
+        setActionButton(document.createElement('div'));
+    } else {
+        dispatch(changeTool( {use: e.target.dataset['use'], spec: e.target.dataset['spec'] }));
+        setActionButton(e.target);
+    }
+
+    //fireAction([e.target.dataset['use'], e.target.dataset['spec']]); uncomment later when working with design and modify parts !!!
 }
 
 
@@ -51,7 +61,16 @@ const toolbox_sections: ToolboxElement[] = [
 
 function Toolbox() {
 
-   const dispatch = useAppDispatch();
+    const dispatch = useAppDispatch();
+    const [actionButton, setActionButton] = useState(document.createElement('div'));
+
+    useEffect(() => {
+        //console.log(actionButton);
+        actionButton.classList.contains('active')?
+            actionButton.classList.remove('active')
+            :    
+            actionButton.classList.add('active');
+    }, [actionButton])
 
     //console.log(toolbox_sections);
     const allToolboxSections = toolbox_sections.map((value: ToolboxElement, index: number) => {
@@ -74,7 +93,7 @@ function Toolbox() {
     })
 
     return (
-        <section className="toolbox-container" onClick={(e) => { detectButton(e, dispatch); } }>
+        <section className="toolbox-container" onClick={(e) => { detectButton(e, dispatch, [actionButton, setActionButton]); } }>
             {allToolboxSections}
         </section>
     )

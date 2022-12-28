@@ -2,7 +2,7 @@ import React from "react";
 import { showcaseSet } from "../../../store/features/tools/toolsSlice";
 
 export const buildShowcase = function(buildParameters: showcaseSet) {
-    console.log(buildParameters);
+    //console.log(buildParameters);
     return (
         <div className="option-box__message">
             <h3 className="option-box__text--large"> {buildParameters.title} </h3>

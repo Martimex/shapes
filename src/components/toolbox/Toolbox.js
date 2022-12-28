@@ -1,20 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import './toolbox.css';
-import fireAction from "./addons/actionInitializers";
+//import fireAction from "./addons/actionInitializers"; uncomment later when working with design and modify parts !!!
 import { useAppDispatch } from "../../store/hooks";
 import { changeTool } from "../../store/features/tools/toolsSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTriangleExclamation, faSquare, faCircle, faRectangleXmark, faRotate, faExpand, faUpDownLeftRight, faFill, faPalette, faBorderTopLeft, } from '@fortawesome/free-solid-svg-icons';
 //import ToolboxSection from "./addons/toolboxSectionGenerator";
-function detectButton(e, dispatch) {
+function detectButton(e, dispatch, [actionButton, setActionButton]) {
     //console.log(typeof(e.target), e.target.hasOwnProperty("dataset['use']"), e.target.dataset, e.target)
     if (!(e.target instanceof HTMLElement))
         return;
     if (!e.target.dataset['use'] || !e.target.dataset['spec'])
         return;
     // Now we know that we are 100% working only with Action buttons
-    dispatch(changeTool({ use: e.target.dataset['use'], spec: e.target.dataset['spec'] }));
-    fireAction([e.target.dataset['use'], e.target.dataset['spec']]);
+    actionButton.classList.remove('active');
+    // Check if previously clicked button is the same as clicked now !
+    if (e.target === actionButton) {
+        console.warn('equal');
+        dispatch(changeTool({ use: 'default', spec: 'default' }));
+        setActionButton(document.createElement('div'));
+    }
+    else {
+        dispatch(changeTool({ use: e.target.dataset['use'], spec: e.target.dataset['spec'] }));
+        setActionButton(e.target);
+    }
+    //fireAction([e.target.dataset['use'], e.target.dataset['spec']]); uncomment later when working with design and modify parts !!!
 }
 const toolbox_sections = [
     /*     new ToolboxSection('Create shape', [{name: 'square', icon: 'sq'}, {name: 'rectangle', icon: 'rect'}, {name: 'triangle', icon: 'tri'}, {name: 'circle', icon: 'circ'}]),
@@ -26,6 +36,14 @@ const toolbox_sections = [
 ];
 function Toolbox() {
     const dispatch = useAppDispatch();
+    const [actionButton, setActionButton] = useState(document.createElement('div'));
+    useEffect(() => {
+        //console.log(actionButton);
+        actionButton.classList.contains('active') ?
+            actionButton.classList.remove('active')
+            :
+                actionButton.classList.add('active');
+    }, [actionButton]);
     //console.log(toolbox_sections);
     const allToolboxSections = toolbox_sections.map((value, index) => {
         let allButtons = Array.from(Array(value.elements.length)).map((val, ind) => React.createElement("button", { type: `button`, "data-use": `${value.data}`, "data-spec": `${value.elements[ind].name}`, className: 'btn btn-tool', key: `btn-${index}-${ind}` },
@@ -42,7 +60,7 @@ function Toolbox() {
                 " "),
             React.createElement("div", { className: "toolbox__button-box" }, allButtons)));
     });
-    return (React.createElement("section", { className: "toolbox-container", onClick: (e) => { detectButton(e, dispatch); } }, allToolboxSections));
+    return (React.createElement("section", { className: "toolbox-container", onClick: (e) => { detectButton(e, dispatch, [actionButton, setActionButton]); } }, allToolboxSections));
 }
 export default Toolbox;
 //# sourceMappingURL=Toolbox.js.map

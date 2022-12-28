@@ -1,6 +1,6 @@
 import React from "react";
 export const buildShowcase = function (buildParameters) {
-    console.log(buildParameters);
+    //console.log(buildParameters);
     return (React.createElement("div", { className: "option-box__message" },
         React.createElement("h3", { className: "option-box__text--large" },
             " ",

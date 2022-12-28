@@ -65,4 +65,8 @@
 .icon-tool {
   font-size: 120%;
   margin-right: 0.5em;
+}
+
+.active {
+  color: hsl(189deg, 86%, 68%);
 }/*# sourceMappingURL=toolbox.css.map */
