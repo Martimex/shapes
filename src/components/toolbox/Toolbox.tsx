@@ -3,7 +3,8 @@ import './toolbox.css';
 //import fireAction from "./addons/actionInitializers"; uncomment later when working with design and modify parts !!!
 import { useAppDispatch } from "../../store/hooks";
 import { 
-    changeTool
+    changeTool,
+    setStep
 } from "../../store/features/tools/toolsSlice";
 
 
@@ -65,7 +66,7 @@ function Toolbox() {
     const [actionButton, setActionButton] = useState(document.createElement('div'));
 
     useEffect(() => {
-        //console.log(actionButton);
+        dispatch(setStep({value: 0}));
         actionButton.classList.contains('active')?
             actionButton.classList.remove('active')
             :    

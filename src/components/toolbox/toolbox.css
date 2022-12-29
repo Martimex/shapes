@@ -9,8 +9,10 @@
   width: 100vw;
   padding: 0.15em;
   height: 18vh;
-  background: linear-gradient(45deg, rgba(34, 34, 34, 0.6666666667) 5%, rgba(51, 51, 51, 0.7333333333), rgba(34, 34, 34, 0.6666666667) 95%);
-  box-shadow: 0em 0.1em 0em 0.1em hsl(189deg, 86%, 18%), 0em 0.3em 0 0.3em rgba(34, 34, 34, 0.6);
+  background: linear-gradient(45deg, #222 5%, #223, #222 95%);
+  /*  box-shadow: 0em .1em 0em .1em $color__primary--misty,
+       0em .3em 0 .3em #2229; */
+  border-bottom: 0.15em solid hsl(189deg, 86%, 18%);
 }
 
 .toolbox {

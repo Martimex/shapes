@@ -23,4 +23,18 @@
 .shape_preview {
   position: absolute;
   background: papayawhip;
+}
+
+.shape {
+  position: absolute;
+  background: lightslategrey;
+  pointer-events: auto;
+}
+
+.shape--square {
+  border: 0.1em solid lightskyblue;
+}
+
+.untargetable {
+  pointer-events: none;
 }/*# sourceMappingURL=workspace.css.map */

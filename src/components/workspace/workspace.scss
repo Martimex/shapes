@@ -31,3 +31,17 @@
     position: absolute;
     background: papayawhip;
 }
+
+.shape {
+    position: absolute;
+    background: lightslategrey;
+    pointer-events: auto;
+}
+
+.shape--square {
+    border: .1em solid lightskyblue;
+}
+
+.untargetable {
+    pointer-events: none;
+}

@@ -149,12 +149,16 @@ export const toolsSlice = createSlice({
         doLog: (state, action) => {
             console.log('xD');
         },
-        increaseStep: (state, action) => {
-            state.stepNo += 1;
+        setStep: (state, action) => {
+            const {value} = action.payload;
+            value === 0 ?
+            state.stepNo = value 
+            :
+            state.stepNo += value;
         }
     }
 })
 
-export const {changeTool, doLog, increaseStep} = toolsSlice.actions;
+export const {changeTool, doLog, setStep} = toolsSlice.actions;
 export { showcaseSet };
 export default toolsSlice.reducer;

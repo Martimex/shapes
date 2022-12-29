@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import './toolbox.css';
 //import fireAction from "./addons/actionInitializers"; uncomment later when working with design and modify parts !!!
 import { useAppDispatch } from "../../store/hooks";
-import { changeTool } from "../../store/features/tools/toolsSlice";
+import { changeTool, setStep } from "../../store/features/tools/toolsSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTriangleExclamation, faSquare, faCircle, faRectangleXmark, faRotate, faExpand, faUpDownLeftRight, faFill, faPalette, faBorderTopLeft, } from '@fortawesome/free-solid-svg-icons';
 //import ToolboxSection from "./addons/toolboxSectionGenerator";
@@ -38,7 +38,7 @@ function Toolbox() {
     const dispatch = useAppDispatch();
     const [actionButton, setActionButton] = useState(document.createElement('div'));
     useEffect(() => {
-        //console.log(actionButton);
+        dispatch(setStep({ value: 0 }));
         actionButton.classList.contains('active') ?
             actionButton.classList.remove('active')
             :

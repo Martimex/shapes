@@ -17,9 +17,10 @@
     width: 100vw;
     padding: .15em;
     height: 18vh;
-    background: linear-gradient(45deg, #222a 5%, #333b, #222a 95%);
-    box-shadow: 0em .1em 0em .1em $color__primary--misty,
-        0em .3em 0 .3em #2229;
+    background: linear-gradient(45deg, #222 5%, #223, #222 95%);
+   /*  box-shadow: 0em .1em 0em .1em $color__primary--misty,
+        0em .3em 0 .3em #2229; */
+    border-bottom: .15em solid $color__primary--misty;
 }
 
 .toolbox {
