@@ -22,7 +22,27 @@
 
 .shape_preview {
   position: absolute;
-  background: papayawhip;
+  background: lightgray;
+}
+
+.shape_preview--square {
+  color: navajowhite;
+}
+
+.shape_preview--circle {
+  border-radius: 50%;
+}
+
+.shape_preview--rectangle {
+  color: royalblue;
+}
+
+.shape-preview--triangle {
+  color: turquoise;
+  background: transparent;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  border-top-color: aquamarine;
 }
 
 .shape {
@@ -33,6 +53,27 @@
 
 .shape--square {
   border: 0.1em solid lightskyblue;
+}
+
+.shape--circle {
+  border: 0.1em solid lightgreen;
+  border-radius: 50%;
+}
+
+.shape--rectangle {
+  border: 0.1em solid lightyellow;
+}
+
+.shape--triangle {
+  background: none !important;
+  width: 0;
+  height: 0;
+  border-left-style: solid;
+  border-left-color: transparent;
+  border-right-style: solid;
+  border-right-color: transparent;
+  border-bottom-style: solid;
+  border-bottom-color: lightslategrey !important;
 }
 
 .untargetable {

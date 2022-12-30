@@ -9,12 +9,14 @@ $text__margin--y: .6em;
 }
 
 .option-box {
-    background: linear-gradient(135deg, #1117 5%, #2228, #1117 95%);
+    background: linear-gradient(135deg, #222 5%, #223, #222 95%);
     border-width: 0em 0em 0em .1em;
     box-shadow: 0em 0em .1em .1em $color__primary--misty,
     0em 0em .3em .3em #222c;
     color: $color__primary--dark;
     font-weight: 550;
+    position: relative;
+    z-index: 15;
 }
 
 .option-box__content {

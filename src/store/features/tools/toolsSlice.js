@@ -55,8 +55,8 @@ const initialState = {
                     title: 'Create rectangle',
                     description: 'Create a new rectangle object',
                     steps: [
-                        ['Click to set up an initial point for a new rectangle'],
-                        ['Set the opposite vertice to define rectangle size'],
+                        ['Click to set up a central point for a new rectangle'],
+                        ['Set another point to define rectangle size'],
                     ]
                 }
             },
@@ -65,9 +65,8 @@ const initialState = {
                     title: 'Create triangle',
                     description: 'Create a new triangle object',
                     steps: [
-                        ['Click to set up an initial point for a new triangle'],
-                        ['Click again to add triangle vertice'],
-                        ['Click for the last vertice to define a triangle size'],
+                        ['Click to set up a central point for a new triangle'],
+                        ['Set another point to define rectangle size'],
                     ]
                 }
             },

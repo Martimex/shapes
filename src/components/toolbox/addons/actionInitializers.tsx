@@ -7,12 +7,41 @@ export default function fireAction([use_type, spec_name]: string[], [x, y]: numb
                 case 'square': {
                     if(stepNo === 0) {
                         createVertice(x, y);
-                        getShapePreview(x, y);
+                        getShapePreview(x, y, spec_name);
                     } if(stepNo === 1) {
                         removeVertice();
                         prepareShape(spec_name);
                     }
-
+                    break;
+                }
+                case 'rectangle': {
+                    if(stepNo === 0) {
+                        createVertice(x, y);
+                        getShapePreview(x, y, spec_name);
+                    } if(stepNo === 1) {
+                        removeVertice();
+                        prepareShape(spec_name);
+                    }
+                    break;
+                }
+                case 'triangle': {
+                    if(stepNo === 0) {
+                        createVertice(x, y);
+                        getShapePreview(x, y, spec_name);
+                    } if(stepNo === 1) {
+                        removeVertice();
+                        prepareShape(spec_name);
+                    }
+                    break;
+                }
+                case 'circle': {
+                    if(stepNo === 0) {
+                        createVertice(x, y);
+                        getShapePreview(x, y, spec_name);
+                    } if(stepNo === 1) {
+                        removeVertice();
+                        prepareShape(spec_name);
+                    }
                     break;
                 }
             }
@@ -43,12 +72,13 @@ function resizePreview(ev: MouseEventInit) {///* ev: MouseEventInit, [x, y]: num
     !!preview && previewShape([cords.vertice[0], cords.vertice[1]], [ev.clientX!, ev.clientY!], preview);
 }
 
-function getShapePreview(x: number, y: number) {
+function getShapePreview(x: number, y: number, spec_name: string) {
     const workspace = document.querySelector('.workspace-board__map');
     cords.vertice = [x, y];
     
     const preview = document.createElement('div');
-    preview.classList.add('shape_preview');
+    preview.classList.add('shape_preview', `shape_preview--${spec_name}`);
+    preview.dataset.shape = `${spec_name}`;
     document.body.appendChild(preview);
 
     workspace?.addEventListener('mousemove', resizePreview);
@@ -70,13 +100,38 @@ function previewShape([vertice_x, vertice_y]: number[], [mouseX, mouseY]: number
     const preview_height = (vertice_y > mouseY)? vertice_y - mouseY : mouseY - vertice_y;
     const preview_width =  (vertice_x > mouseX)? vertice_x - mouseX : mouseX - vertice_x;
 
-    const diameter = (preview_height > preview_width)? preview_height : preview_width;
+    if(preview.dataset?.shape === 'square' || preview.dataset?.shape === 'circle') {
+        const diameter = (preview_height > preview_width)? preview_height : preview_width;
+        console.log('square or circle => ', preview.dataset.shape);
+        // Set the values for our preview box
+        preview.style.height = `${diameter.toString()}px`;
+        preview.style.width = `${diameter.toString()}px`;
+        preview.style.top = `${(vertice_y - diameter / 2)}px`;
+        preview.style.left = `${(vertice_x - diameter / 2)}px`;
+    }
+    else if(preview.dataset?.shape === 'rectangle') {
+        // Set the values for our preview box
+        console.log('rect');
+        preview.style.height = `${preview_height.toString()}px`;
+        preview.style.width = `${preview_width.toString()}px`;
+        preview.style.top = `${(vertice_y - preview_height / 2)}px`;
+        preview.style.left = `${(vertice_x - preview_width / 2)}px`;
+    }
+    else if(preview.dataset?.shape === 'triangle') {
+        console.warn('triangle');
+        // Set the values for our preview box
+        const diameter = (preview_height > preview_width)? preview_height : preview_width;
 
-    // Set the values for our preview box
-    preview.style.height = `${diameter.toString()}px`;
-    preview.style.width = `${diameter.toString()}px`;
-    preview.style.top = `${(vertice_y - diameter / 2)}px`;
-    preview.style.left = `${(vertice_x - diameter / 2)}px`;
+        preview.style.width = '0px';
+        preview.style.height = '0px';
+        preview.style.background = '#0002';
+        preview.style.borderLeft = `${diameter.toString()}px solid #0000`;
+        preview.style.borderRight = `${diameter.toString()}px solid #0000`;
+        preview.style.borderBottom = `${diameter.toString()}px solid lightgray`;
+        preview.style.top = `${(vertice_y - diameter / 2)}px`;
+        preview.style.left = `${(vertice_x - diameter / 2)}px`;
+    }
+
 
     //console.info('preview_height: ', preview_height, ' || ', ' preview_width: ', preview_width);
 }
