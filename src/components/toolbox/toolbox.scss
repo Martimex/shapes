@@ -76,6 +76,11 @@
     width: 30%;
 }
 
+.btn-blocked {
+    pointer-events: none;
+    filter: brightness(70%);
+}
+
 .icon-tool {
     font-size: 120%;
     margin-right: .5em;

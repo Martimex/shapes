@@ -13,13 +13,20 @@ function Optionbox() {
     const [use, spec]: string[] = useAppSelector(state => state.tools.currentTool);
     const buildParameters: showcaseSet = useAppSelector(state => state.tools.allTools[use][spec].showcase) 
     const [showcase, setShowcase] = useState(<div> {/* Nothing to showcase yet ! */} </div>);
+    const shape_target = useAppSelector(state => state.shapes.targetShape);
 
     useLayoutEffect(() => {
         (use === 'default' || spec === 'default')?  
             setShowcase(<div> Nothing to showcase yet ! </div>)
             :
-            setShowcase(buildShowcase(buildParameters));
+            setShowcase(buildShowcase(buildParameters, shape_target));
     }, [buildParameters]);
+
+    useLayoutEffect(() => {
+        if(use === 'modify' || use === 'design') {
+            setShowcase(buildShowcase(buildParameters, shape_target));
+        }
+    }, [shape_target]);
 
     return(
         <section className="option-box">

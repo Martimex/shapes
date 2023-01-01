@@ -86,3 +86,8 @@
 .untargetable {
     pointer-events: none;
 }
+
+// When user clicks onto a shape, this happens
+.target_shape {
+    background: pink;
+}

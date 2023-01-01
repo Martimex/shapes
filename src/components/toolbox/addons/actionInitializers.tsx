@@ -1,10 +1,14 @@
-export default function fireAction([use_type, spec_name]: string[], [x, y]: number[], stepNo: number): void {
+export default function fireAction([use_type, spec_name]: string[], [x, y]: number[], stepNo: number, target?: HTMLElement): void {
    // console.log('fire: ', use_type, spec_name, stepNo);
 
     switch(use_type) {
         case 'create': {
             switch(spec_name) {
-                case 'square': {
+                case 'square': 
+                case 'rectangle':
+                case 'triangle':
+                case 'circle':
+                {
                     if(stepNo === 0) {
                         createVertice(x, y);
                         getShapePreview(x, y, spec_name);
@@ -14,39 +18,30 @@ export default function fireAction([use_type, spec_name]: string[], [x, y]: numb
                     }
                     break;
                 }
-                case 'rectangle': {
-                    if(stepNo === 0) {
-                        createVertice(x, y);
-                        getShapePreview(x, y, spec_name);
-                    } if(stepNo === 1) {
-                        removeVertice();
-                        prepareShape(spec_name);
-                    }
-                    break;
-                }
-                case 'triangle': {
-                    if(stepNo === 0) {
-                        createVertice(x, y);
-                        getShapePreview(x, y, spec_name);
-                    } if(stepNo === 1) {
-                        removeVertice();
-                        prepareShape(spec_name);
-                    }
-                    break;
-                }
-                case 'circle': {
-                    if(stepNo === 0) {
-                        createVertice(x, y);
-                        getShapePreview(x, y, spec_name);
-                    } if(stepNo === 1) {
-                        removeVertice();
-                        prepareShape(spec_name);
-                    }
-                    break;
+                default: {
+                    console.error(`SHAPE ${spec_name} DOES NOT EXIST !`);
                 }
             }
             break;
         }
+        case 'modify': {
+            switch(spec_name) {
+                case 'move': {
+                    if(stepNo === 0) {
+                        if(target?.matches('.shape')) {
+                            console.warn('match !');
+                            //detectTargetShape(target);
+                        }
+                    }
+                    break;
+                }
+                default: {
+                    console.error(`FEATURE NOT IMPLEMENTED: ${spec_name}`); 
+                }
+            }
+            break;
+        }
+        
         default: {
             console.warn('none of the type detected');
         }
@@ -69,17 +64,21 @@ function resizePreview(ev: MouseEventInit) {///* ev: MouseEventInit, [x, y]: num
     const preview = document.querySelector('.shape_preview') as HTMLDivElement | null;
     console.assert(preview, 'NO SHAPE PREVIEW FOUND !');
 
-    !!preview && previewShape([cords.vertice[0], cords.vertice[1]], [ev.clientX!, ev.clientY!], preview);
+    // We need to get the Toolbox height, in order to properly calculate top position for newly created shapes
+    const toolbox = document.querySelector('.toolbox-container') as HTMLDivElement;
+    const toolbox_height = toolbox.getBoundingClientRect().height;
+
+    !!preview && previewShape([cords.vertice[0], (cords.vertice[1] - toolbox_height)], [ev.clientX!, (ev.clientY! - toolbox_height)], preview);
 }
 
 function getShapePreview(x: number, y: number, spec_name: string) {
-    const workspace = document.querySelector('.workspace-board__map');
+    const workspace = document.querySelector('.workspace-board__map') as HTMLDivElement;
     cords.vertice = [x, y];
     
     const preview = document.createElement('div');
     preview.classList.add('shape_preview', `shape_preview--${spec_name}`);
     preview.dataset.shape = `${spec_name}`;
-    document.body.appendChild(preview);
+    workspace?.appendChild(preview);
 
     workspace?.addEventListener('mousemove', resizePreview);
 
@@ -95,14 +94,16 @@ function previewShape([vertice_x, vertice_y]: number[], [mouseX, mouseY]: number
         'verticeX: ', vertice_x, ' vs: ', ' mouseX: ', mouseX,
         'verticeY: ', vertice_y, ' vs: ', ' mouseY: ', mouseY,
     ); */
+    //console.log('vertice_y: ', vertice_y, ' mouseY: ', mouseY);
 
     // Get the substraction > 0 for calculating square total height and width
     const preview_height = (vertice_y > mouseY)? vertice_y - mouseY : mouseY - vertice_y;
     const preview_width =  (vertice_x > mouseX)? vertice_x - mouseX : mouseX - vertice_x;
 
+
     if(preview.dataset?.shape === 'square' || preview.dataset?.shape === 'circle') {
         const diameter = (preview_height > preview_width)? preview_height : preview_width;
-        console.log('square or circle => ', preview.dataset.shape);
+        //console.log('square or circle => ', 'verticeY: ', vertice_y, ' diameter: ', diameter, ' toolbox_height: ', toolbox_height);
         // Set the values for our preview box
         preview.style.height = `${diameter.toString()}px`;
         preview.style.width = `${diameter.toString()}px`;
@@ -154,7 +155,22 @@ function prepareShape(spec_name: string) {
     const workspace = document.querySelector('.workspace-board__map');
     //console.error('shape !', workspace);
     workspace?.removeEventListener('mousemove', resizePreview);
-    const preview = document.querySelector('.shape_preview') as HTMLDivElement | null;
-    preview?.classList.add('shape', `shape--${spec_name}`, 'untargetable');
-    preview?.classList.remove('shape_preview');
+    const preview = document.querySelector('.shape_preview') as HTMLDivElement;
+    preview.dataset.id = generateId();
+    preview.classList.add('shape', `shape--${spec_name}`, 'untargetable');
+    preview.classList.remove('shape_preview', `shape_preview--${spec_name}`);
+    // Append a preview element to the Workspace
+    preview && workspace?.appendChild(preview);  // - commented out, because it causes bugs
+}
+
+function generateId(): string {
+    const letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h' ,'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+    const idLength = 16;
+    let idString: string = '';
+    
+    for(let id_no = 0; id_no < idLength; id_no++) {
+        idString+= letters[Math.floor(Math.random() * letters.length)];
+    }
+
+    return idString;
 }

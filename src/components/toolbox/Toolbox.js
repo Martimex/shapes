@@ -30,7 +30,7 @@ const toolbox_sections = [
     /*     new ToolboxSection('Create shape', [{name: 'square', icon: 'sq'}, {name: 'rectangle', icon: 'rect'}, {name: 'triangle', icon: 'tri'}, {name: 'circle', icon: 'circ'}]),
         new ToolboxSection('Design shape', [{name: 'color', icon: 'col'}, {name: 'gradient', icon: 'grad'}, {name: 'borders', icon: 'bord'}]),
         new ToolboxSection('Modify shape', [{name: 'resize', icon: 'res'}, {name: 'rotate', icon: 'rot'}, {name: 'scale', icon: 'sc'}]), */
-    { title: 'Modify shape', data: "modify", elements: [{ name: 'resize', icon: faUpDownLeftRight }, { name: 'rotate', icon: faRotate }, { name: 'scale', icon: faExpand }] },
+    { title: 'Modify shape', data: "modify", elements: [{ name: 'move', icon: faUpDownLeftRight }, { name: 'rotate', icon: faRotate }, { name: 'resize', icon: faExpand }] },
     { title: 'Create shape', data: "create", elements: [{ name: 'square', pseudoname: 'sq', icon: faSquare }, { name: 'rectangle', pseudoname: 'rect', icon: faRectangleXmark }, { name: 'triangle', pseudoname: 'tri', icon: faTriangleExclamation }, { name: 'circle', pseudoname: 'circ', icon: faCircle }] },
     { title: 'Design shape', data: "design", elements: [{ name: 'color', icon: faFill }, { name: 'gradient', icon: faPalette }, { name: 'borders', icon: faBorderTopLeft }] },
 ];

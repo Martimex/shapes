@@ -1,51 +1,42 @@
-export default function fireAction([use_type, spec_name], [x, y], stepNo) {
+export default function fireAction([use_type, spec_name], [x, y], stepNo, target) {
     // console.log('fire: ', use_type, spec_name, stepNo);
     switch (use_type) {
         case 'create': {
             switch (spec_name) {
-                case 'square': {
-                    if (stepNo === 0) {
-                        createVertice(x, y);
-                        getShapePreview(x, y, spec_name);
+                case 'square':
+                case 'rectangle':
+                case 'triangle':
+                case 'circle':
+                    {
+                        if (stepNo === 0) {
+                            createVertice(x, y);
+                            getShapePreview(x, y, spec_name);
+                        }
+                        if (stepNo === 1) {
+                            removeVertice();
+                            prepareShape(spec_name);
+                        }
+                        break;
                     }
-                    if (stepNo === 1) {
-                        removeVertice();
-                        prepareShape(spec_name);
+                default: {
+                    console.error(`SHAPE ${spec_name} DOES NOT EXIST !`);
+                }
+            }
+            break;
+        }
+        case 'modify': {
+            switch (spec_name) {
+                case 'move': {
+                    if (stepNo === 0) {
+                        if (target === null || target === void 0 ? void 0 : target.matches('.shape')) {
+                            console.warn('match !');
+                            //detectTargetShape(target);
+                        }
                     }
                     break;
                 }
-                case 'rectangle': {
-                    if (stepNo === 0) {
-                        createVertice(x, y);
-                        getShapePreview(x, y, spec_name);
-                    }
-                    if (stepNo === 1) {
-                        removeVertice();
-                        prepareShape(spec_name);
-                    }
-                    break;
-                }
-                case 'triangle': {
-                    if (stepNo === 0) {
-                        createVertice(x, y);
-                        getShapePreview(x, y, spec_name);
-                    }
-                    if (stepNo === 1) {
-                        removeVertice();
-                        prepareShape(spec_name);
-                    }
-                    break;
-                }
-                case 'circle': {
-                    if (stepNo === 0) {
-                        createVertice(x, y);
-                        getShapePreview(x, y, spec_name);
-                    }
-                    if (stepNo === 1) {
-                        removeVertice();
-                        prepareShape(spec_name);
-                    }
-                    break;
+                default: {
+                    console.error(`FEATURE NOT IMPLEMENTED: ${spec_name}`);
                 }
             }
             break;
@@ -63,7 +54,10 @@ function resizePreview(ev) {
     //console.log(ev.clientX, ev.clientY);
     const preview = document.querySelector('.shape_preview');
     console.assert(preview, 'NO SHAPE PREVIEW FOUND !');
-    !!preview && previewShape([cords.vertice[0], cords.vertice[1]], [ev.clientX, ev.clientY], preview);
+    // We need to get the Toolbox height, in order to properly calculate top position for newly created shapes
+    const toolbox = document.querySelector('.toolbox-container');
+    const toolbox_height = toolbox.getBoundingClientRect().height;
+    !!preview && previewShape([cords.vertice[0], (cords.vertice[1] - toolbox_height)], [ev.clientX, (ev.clientY - toolbox_height)], preview);
 }
 function getShapePreview(x, y, spec_name) {
     const workspace = document.querySelector('.workspace-board__map');
@@ -71,7 +65,7 @@ function getShapePreview(x, y, spec_name) {
     const preview = document.createElement('div');
     preview.classList.add('shape_preview', `shape_preview--${spec_name}`);
     preview.dataset.shape = `${spec_name}`;
-    document.body.appendChild(preview);
+    workspace === null || workspace === void 0 ? void 0 : workspace.appendChild(preview);
     workspace === null || workspace === void 0 ? void 0 : workspace.addEventListener('mousemove', resizePreview);
     /*  workspace?.addEventListener('mousemove', (ev: MouseEventInit) => {
          previewShape([x, y], [ev.clientX!, ev.clientY!], preview);
@@ -82,13 +76,14 @@ function previewShape([vertice_x, vertice_y], [mouseX, mouseY], preview) {
             'verticeX: ', vertice_x, ' vs: ', ' mouseX: ', mouseX,
             'verticeY: ', vertice_y, ' vs: ', ' mouseY: ', mouseY,
         ); */
+    //console.log('vertice_y: ', vertice_y, ' mouseY: ', mouseY);
     var _a, _b, _c, _d;
     // Get the substraction > 0 for calculating square total height and width
     const preview_height = (vertice_y > mouseY) ? vertice_y - mouseY : mouseY - vertice_y;
     const preview_width = (vertice_x > mouseX) ? vertice_x - mouseX : mouseX - vertice_x;
     if (((_a = preview.dataset) === null || _a === void 0 ? void 0 : _a.shape) === 'square' || ((_b = preview.dataset) === null || _b === void 0 ? void 0 : _b.shape) === 'circle') {
         const diameter = (preview_height > preview_width) ? preview_height : preview_width;
-        console.log('square or circle => ', preview.dataset.shape);
+        //console.log('square or circle => ', 'verticeY: ', vertice_y, ' diameter: ', diameter, ' toolbox_height: ', toolbox_height);
         // Set the values for our preview box
         preview.style.height = `${diameter.toString()}px`;
         preview.style.width = `${diameter.toString()}px`;
@@ -135,7 +130,19 @@ function prepareShape(spec_name) {
     //console.error('shape !', workspace);
     workspace === null || workspace === void 0 ? void 0 : workspace.removeEventListener('mousemove', resizePreview);
     const preview = document.querySelector('.shape_preview');
-    preview === null || preview === void 0 ? void 0 : preview.classList.add('shape', `shape--${spec_name}`, 'untargetable');
-    preview === null || preview === void 0 ? void 0 : preview.classList.remove('shape_preview');
+    preview.dataset.id = generateId();
+    preview.classList.add('shape', `shape--${spec_name}`, 'untargetable');
+    preview.classList.remove('shape_preview', `shape_preview--${spec_name}`);
+    // Append a preview element to the Workspace
+    preview && (workspace === null || workspace === void 0 ? void 0 : workspace.appendChild(preview)); // - commented out, because it causes bugs
+}
+function generateId() {
+    const letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+    const idLength = 16;
+    let idString = '';
+    for (let id_no = 0; id_no < idLength; id_no++) {
+        idString += letters[Math.floor(Math.random() * letters.length)];
+    }
+    return idString;
 }
 //# sourceMappingURL=actionInitializers.js.map

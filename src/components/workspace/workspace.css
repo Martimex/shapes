@@ -78,4 +78,8 @@
 
 .untargetable {
   pointer-events: none;
+}
+
+.target_shape {
+  background: pink;
 }/*# sourceMappingURL=workspace.css.map */

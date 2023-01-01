@@ -5,13 +5,16 @@ const initialState = {
     allTools: {
         'default': { 'default': { showcase: { title: 'Nothing to showcase yet!', steps: [] } } },
         'modify': {
-            'resize': {
+            'move': {
                 showcase: {
-                    title: 'Resize a shape',
-                    description: 'Modify height and width of a shape',
+                    title: 'Move a shape',
+                    description: 'Change shape X and Y coordinates',
                     steps: [
-                        ['Click onto a shape that you want to resize'],
-                    ]
+                        ['Click onto a shape that you want to move'],
+                    ],
+                    options: [
+                        { name: 'pos_X', display_type: 'slide', textBox: { isIncluded: true, type: 'number' } },
+                    ],
                 }
             },
             'rotate': {
@@ -20,16 +23,22 @@ const initialState = {
                     description: 'Change rotation for a given shape',
                     steps: [
                         ['Click onto a shape that you want to rotate'],
-                    ]
+                    ],
+                    options: [
+                        {},
+                    ],
                 }
             },
-            'scale': {
+            'resize': {
                 showcase: {
-                    title: 'Scale a shape',
-                    description: 'Relatively scale for all shape vertices',
+                    title: 'Resize a shape',
+                    description: 'Modify height and width of a shape',
                     steps: [
-                        ['Click onto a shape that you want to scale'],
-                    ]
+                        ['Click onto a shape that you want to resize'],
+                    ],
+                    options: [
+                        {},
+                    ],
                 }
             },
         },
@@ -44,11 +53,11 @@ const initialState = {
                     ]
                 },
                 /*  properties: {
-                     size: 1, // just a starting - default - value
-                     posX: 0,
-                     posY: 0,
- 
-                 } */
+                    size: 1, // just a starting - default - value
+                    posX: 0,
+                    posY: 0,
+
+                } */
             },
             'rectangle': {
                 showcase: {
@@ -88,7 +97,10 @@ const initialState = {
                     description: 'Apply a new color to a shape',
                     steps: [
                         ['Click onto a shape to add a color'],
-                    ]
+                    ],
+                    options: [
+                        {},
+                    ],
                 }
             },
             'gradient': {
@@ -97,7 +109,10 @@ const initialState = {
                     description: 'Apply a multi-color background for a shape',
                     steps: [
                         ['Click onto a shape to add a gradient'],
-                    ]
+                    ],
+                    options: [
+                        {},
+                    ],
                 }
             },
             'borders': {
@@ -106,7 +121,10 @@ const initialState = {
                     description: 'Customize the border style for a shape',
                     steps: [
                         ['Click onto a shape to style the borders'],
-                    ]
+                    ],
+                    options: [
+                        {},
+                    ],
                 }
             },
         },
